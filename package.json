@@ -10,8 +10,8 @@
     "clean": "tsc --build --clean",
     "compile": "tsc",
     "compile:dev": "tsc --watch",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
-    "format:check": "prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json)\"",
+    "format": "prettier --ignore-path .gitignore --write ./src",
+    "format:check": "prettier --ignore-path .gitignore --check ./src",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts ./src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
