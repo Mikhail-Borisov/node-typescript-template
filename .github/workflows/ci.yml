@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Project
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+  build-docker-image:
+    name: Build Docker Image
+    runs-on: ubuntu-18.04
+    needs: [ build ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build Image
+        run: docker build --file Dockerfile --tag node-typescript-template:$(date +%s)
