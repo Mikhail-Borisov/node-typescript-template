@@ -7,10 +7,13 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+env:
+  RUNNER: ubuntu-22.04
+
 jobs:
   build:
     name: Build Project
-    runs-on: ubuntu-22.04
+    runs-on: $RUNNER
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,9 +23,13 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
+      - name: Check Formatting
+        run: npm run format:check
+      - name: Check Linting
+        run: npm run lint
   build-docker-image:
     name: Build Docker Image
-    runs-on: ubuntu-18.04
+    runs-on: $RUNNER
     needs: [ build ]
     steps:
       - name: Checkout
