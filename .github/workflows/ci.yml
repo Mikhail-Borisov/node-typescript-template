@@ -32,4 +32,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build Image
-        run: docker build --file Dockerfile --tag node-typescript-template:$(date +%s)
+        run: docker build . --file Dockerfile --tag node-typescript-template:$(date +%s)
